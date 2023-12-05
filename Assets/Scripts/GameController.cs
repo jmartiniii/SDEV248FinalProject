@@ -43,13 +43,15 @@ public class GameController : MonoBehaviour
 
     void Die() 
     {
+        playerGameObject.SetActive(false);
         GameObject deathPlayer = (GameObject)Instantiate(deadPrefab, playerGameObject.transform.position, playerGameObject.transform.rotation);
         deathPlayer.transform.localScale = new Vector3(playerGameObject.transform.localScale.x, playerGameObject.transform.localScale.y, playerGameObject.transform.localScale.z);
-        Respawn();
+        Invoke(nameof(Respawn), 5.0f);
     }
 
     void Respawn()
     {
         transform.position = startPos;
+        playerGameObject.SetActive(true);
     }
 }

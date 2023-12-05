@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7929136529465109599}
   - component: {fileID: 6804774731425239190}
   - component: {fileID: 355065122741600970}
+  - component: {fileID: 5586996393310969005}
   m_Layer: 3
   m_Name: knight_dead
   m_TagString: Untagged
@@ -148,3 +149,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.12883097}
   m_Size: {x: 0.59290314, y: 1.022338}
   m_Direction: 0
+--- !u!114 &5586996393310969005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792434335573670995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cab5e7413026024a825663d9afdf3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathBounce: 25
