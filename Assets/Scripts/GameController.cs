@@ -35,9 +35,15 @@ public class GameController : MonoBehaviour
 
         else if (collision.CompareTag("SceneSwitch"))
         {
-            SceneManager.LoadScene(nextScene);
+            //SceneManager.LoadScene(nextScene);
+            Invoke(nameof(SceneSwitch), 2.0f);
         }
 
+    }
+
+    void SceneSwitch()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 
 
