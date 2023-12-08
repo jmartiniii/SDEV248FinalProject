@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
     private GameController gameController;
 
+    public AudioClip jumpSound;
+    public AudioClip coinSound;
+    private AudioSource playerAudio;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -17,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
         gameController = GameObject.Find("Player").GetComponent<GameController>();
     }
 
@@ -26,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            playerAudio.PlayOneShot(jumpSound, 0.5f);
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
 
@@ -62,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Coin")
         {
+            playerAudio.PlayOneShot(coinSound, 0.1f);
             gameController.coinCount += 1;
             Destroy(other.gameObject);
         }

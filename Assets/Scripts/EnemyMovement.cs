@@ -8,9 +8,13 @@ public class EnemyMovement : MonoBehaviour
     public GameObject player;
     public float speed;
     private float timer;
+    private float attackTimer = 0f;
     private float distance;
     private float changeTime = 2.0f;
     float newMove;
+
+    private AudioSource audioSource;
+    public AudioClip attackSound;
 
     public SpriteRenderer rend;
     public Color newColor;
@@ -20,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rend = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         timer = changeTime;
@@ -42,6 +47,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        attackTimer -= Time.deltaTime;
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
@@ -51,6 +57,11 @@ public class EnemyMovement : MonoBehaviour
 
         if (distance < 4)
         {
+            if (attackTimer < 0)
+            {
+                audioSource.PlayOneShot(attackSound, .3f);
+                attackTimer = changeTime;
+            }
             rend.color = newColor;
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, 2 * speed * Time.deltaTime);
         }
