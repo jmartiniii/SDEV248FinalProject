@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 8f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
+    private bool canPlay;
     private GameController gameController;
 
     public AudioClip jumpSound;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        canPlay = true;
         playerAudio = GetComponent<AudioSource>();
         gameController = GameObject.Find("Player").GetComponent<GameController>();
     }
@@ -41,6 +43,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
+
+        if (canPlay == false)
+        {
+            speed = 0f;
+            jumpingPower = 0f;
+        }
     }
 
     private void FixedUpdate()
@@ -71,6 +79,10 @@ public class PlayerMovement : MonoBehaviour
             playerAudio.PlayOneShot(coinSound, 0.1f);
             gameController.coinCount += 1;
             Destroy(other.gameObject);
+        }
+
+        else if (other.gameObject.tag == "SceneSwitch") {
+            canPlay = false;
         }
     }
 }

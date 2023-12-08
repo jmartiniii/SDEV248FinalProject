@@ -16,9 +16,9 @@ public class EnemyMovement : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip attackSound;
 
-    public SpriteRenderer rend;
-    public Color newColor;
-    public Color oldColor;
+    private SpriteRenderer rend;
+    private Color newColor;
+    private Color oldColor;
 
     int moveDir = 1;
     // Start is called before the first frame update
@@ -41,6 +41,14 @@ public class EnemyMovement : MonoBehaviour
             moveDir = -moveDir;
             timer = changeTime;
 
+        }
+        if (rb.velocity.x > 0)
+        {
+            Debug.Log("Moving left.");
+        }
+        else
+        {
+            Debug.Log(rb.velocity);
         }
         
     }
