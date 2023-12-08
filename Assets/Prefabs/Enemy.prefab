@@ -114,7 +114,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &4591919548786842792
 BoxCollider2D:
@@ -176,9 +176,6 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 1
   attackSound: {fileID: 8300000, guid: effe6d71cfa2d4689a4262969473dd08, type: 3}
-  rend: {fileID: 0}
-  newColor: {r: 0, g: 0, b: 0, a: 0}
-  oldColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!70 &1395487493488800612
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
