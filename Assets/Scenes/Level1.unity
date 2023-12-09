@@ -18424,6 +18424,10 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 1435572482}
+    - target: {fileID: 7974513965723531699, guid: c5ab2521c9d22f64fbe5fc4d1b655891, type: 3}
+      propertyPath: nextScene
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

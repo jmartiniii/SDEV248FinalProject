@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    Rigidbody2D rb;
     public GameObject player;
     public float speed;
     private float timer;
@@ -19,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
     private SpriteRenderer rend;
     private Color newColor;
     private Color oldColor;
+    private Animator animator;
 
     int moveDir = 1;
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         rend = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         timer = changeTime;
         oldColor = rend.color;
         newColor = Color.red;
@@ -40,17 +40,7 @@ public class EnemyMovement : MonoBehaviour
         {
             moveDir = -moveDir;
             timer = changeTime;
-
         }
-        if (rb.velocity.x > 0)
-        {
-            Debug.Log("Moving left.");
-        }
-        else
-        {
-            Debug.Log(rb.velocity);
-        }
-        
     }
 
     private void FixedUpdate()
@@ -59,12 +49,11 @@ public class EnemyMovement : MonoBehaviour
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
-        float angle = Mathf.Atan(direction.x) * Mathf.Rad2Deg;
-
-        Vector2 position = rb.position;
+        
 
         if (distance < 4)
         {
+            animator.SetFloat("moveLeft", -direction.x);
             if (attackTimer < 0)
             {
                 audioSource.PlayOneShot(attackSound, .3f);
@@ -75,6 +64,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
+            animator.SetFloat("moveLeft", -moveDir);
             rend.color = oldColor;
             newMove = speed * moveDir * Time.deltaTime;
             transform.position = new Vector3(transform.position.x + newMove, transform.position.y);
