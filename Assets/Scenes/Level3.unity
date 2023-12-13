@@ -711,6 +711,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 419212424495690433, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 916555877227288226, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -791,9 +795,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 44.0507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089180267336501249, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35
+      objectReference: {fileID: 0}
     - target: {fileID: 7698081254146460919, guid: ae32a0a8adece4e4ea7ec22268fdaf32, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: CoinUICanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

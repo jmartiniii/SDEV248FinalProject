@@ -14,10 +14,12 @@ public class GameController : MonoBehaviour
     public int nextScene;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
+
     }
 
     private void Update()
@@ -59,5 +61,6 @@ public class GameController : MonoBehaviour
     {
         transform.position = startPos;
         playerGameObject.SetActive(true);
+
     }
 }
