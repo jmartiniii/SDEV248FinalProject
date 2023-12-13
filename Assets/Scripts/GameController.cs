@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour
     public Text coinText;
     public int nextScene;
 
+    //death count
+    public int deathCount = 0;
+    public Text deathText;
+
 
 
     // Start is called before the first frame update
@@ -25,6 +29,10 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         coinText.text = coinCount.ToString();
+
+        //death count
+        deathText.text = deathCount.ToString();
+        
     }
 
     // Update is called once per frame
@@ -62,5 +70,8 @@ public class GameController : MonoBehaviour
         transform.position = startPos;
         playerGameObject.SetActive(true);
 
+        //death count
+        deathCount = deathCount + 1;
+        
     }
 }
