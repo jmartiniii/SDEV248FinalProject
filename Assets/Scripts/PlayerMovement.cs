@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
-    private bool isFacingRight = true;
+    private bool isFacingRight;
     private bool playerActive;
 
     public AudioClip jumpSound;
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        isFacingRight = true;
         playerActive = true;
         playerAudio = GetComponent<AudioSource>();
     }

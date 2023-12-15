@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class deadBounce : MonoBehaviour
+public class corpseBounce : MonoBehaviour
 {
     private float bounceForce = 25;
 

@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public GameObject player;
-    private float moveSpeed = 1;
-    private float moveTimer;
+    // enemy target
+    public GameObject playerTarget;
+
+    // movement
+    private float newMove, distance, moveTimer;
+    private float moveSpeed = 1.0f;
+    private float changeTime = 2.0f;
+    private float moveDir = 1.0f;
+    
+    // attack
     private float attackTimer = 0f;
     private float attackReset = 2.0f;
-    private float distance;
-    private float changeTime = 2.0f;
-    private float newMove;
     private float attackRange = 4.0f;
-    private float moveDir = 1.0f;
-
+    
+    // audio
     private AudioSource audioSource;
     public AudioClip attackSound;
 
+    // sprite, colors, animation
     private SpriteRenderer spriteRender;
-    private Color newColor;
-    private Color oldColor;
+    private Color newColor, oldColor;
     private Animator animator;
 
     // Start is called before the first frame update
@@ -60,13 +64,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void GetDistance()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
+        distance = Vector2.Distance(transform.position, playerTarget.transform.position);
     }
 
     private void AttackMove()
     {
         attackTimer -= Time.deltaTime;
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = playerTarget.transform.position - transform.position;
         direction.Normalize();
 
         animator.SetFloat("moveLeft", -direction.x);
@@ -76,7 +80,7 @@ public class EnemyMovement : MonoBehaviour
             attackTimer = attackReset;
         }
         spriteRender.color = newColor;
-        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, 2 * moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(this.transform.position, playerTarget.transform.position, 2 * moveSpeed * Time.deltaTime);
     }
 
     private void BasicMove()

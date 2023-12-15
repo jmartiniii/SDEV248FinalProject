@@ -174,8 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65dc5bcaf50e6714d8e966af7f406121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 1
+  playerTarget: {fileID: 5308224729606446315, guid: c5ab2521c9d22f64fbe5fc4d1b655891, type: 3}
   attackSound: {fileID: 8300000, guid: effe6d71cfa2d4689a4262969473dd08, type: 3}
 --- !u!70 &1395487493488800612
 CapsuleCollider2D:
