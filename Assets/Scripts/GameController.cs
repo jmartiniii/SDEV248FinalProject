@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//test
-using TMPro;
-
 public class GameController : MonoBehaviour
 {
     Vector2 startPos;
@@ -19,15 +16,16 @@ public class GameController : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip coinSound;
 
+    // reference score counter
+    ScoreCounter scoreCounter;
+
     // coin count
-    private int coinCount = 0;
+    [SerializeField] int coins;
     public Text coinText;
 
 
     // death count
-    [SerializeField]
-    int deaths;
-    DeathCounter deathCounter;
+    [SerializeField] int deaths;
     public Text deathText;
 
 
@@ -36,18 +34,14 @@ public class GameController : MonoBehaviour
     void Start()
     {
         playerAudio = GetComponent<AudioSource>();
+        scoreCounter = FindObjectOfType<ScoreCounter>();
+
         startPos = transform.position;
 
-        //test
-        deathCounter = FindObjectOfType<DeathCounter>();
-        deaths = deathCounter.CurrentDeaths;
-        deathText.text = deaths + "";
-    }
-
-    private void Update()
-    {
-        //coin count
-        coinText.text = coinCount.ToString();
+        deaths = scoreCounter.CurrentDeaths;
+        deathText.text = deaths.ToString();
+        coins = scoreCounter.CurrentCoins;
+        coinText.text = coins.ToString();
     }
 
     // Update is called once per frame
@@ -67,16 +61,15 @@ public class GameController : MonoBehaviour
 
         else if (collision.CompareTag("SceneSwitch"))
         {
+            UpdateCounters();
             StartCoroutine(SceneSwitch());
-
-            //death count
-            deathCounter.SetDeaths(deaths);
         }
 
     }
 
     private IEnumerator SceneSwitch()
     {
+        // wait 2 seconds then load the next scene
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(nextScene);
     }
@@ -84,6 +77,7 @@ public class GameController : MonoBehaviour
 
     private void Die() 
     {
+        //deactivate player, spawn corpse, respawn
         playerGameObject.SetActive(false);
         SpawnCorpse();
         Invoke(nameof(Respawn), 5.0f);
@@ -91,27 +85,37 @@ public class GameController : MonoBehaviour
 
     private void AddCoin()
     {
+        //add to coin count
         playerAudio.PlayOneShot(coinSound, 0.1f);
-        // add to coin count
-        coinCount += 1;
+        coins += 1;
+        coinText.text = coins.ToString();
     }
 
     private void AddDeath()
     {
         //death count
         deaths += 1;
-        deathText.text = deaths + "";
+        deathText.text = deaths.ToString();
     }
 
     private void SpawnCorpse()
     {
+        // spawn corpse
         GameObject deathPlayer = (GameObject)Instantiate(deadPrefab, playerGameObject.transform.position, playerGameObject.transform.rotation);
         deathPlayer.transform.localScale = new Vector3(playerGameObject.transform.localScale.x, playerGameObject.transform.localScale.y, playerGameObject.transform.localScale.z);
     }
 
     private void Respawn()
     {
+        // mvoe back to original position and set the player to active
         transform.position = startPos;
         playerGameObject.SetActive(true);
+    }
+
+    private void UpdateCounters()
+    {
+        // death and coin counters
+        scoreCounter.SetDeaths(deaths);
+        scoreCounter.SetCoins(coins);
     }
 }

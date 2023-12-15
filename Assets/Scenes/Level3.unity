@@ -2417,7 +2417,7 @@ GameObject:
   - component: {fileID: 308020536}
   - component: {fileID: 308020535}
   m_Layer: 0
-  m_Name: DeathCounter
+  m_Name: ScoreCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4843,7 +4843,7 @@ PrefabInstance:
       objectReference: {fileID: 1030054994}
     - target: {fileID: 7974513965723531699, guid: c5ab2521c9d22f64fbe5fc4d1b655891, type: 3}
       propertyPath: nextScene
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

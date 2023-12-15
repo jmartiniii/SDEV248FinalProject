@@ -5,14 +5,15 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
-    private float speed = 1;
-    private float timer;
+    private float moveSpeed = 1;
+    private float moveTimer;
     private float attackTimer = 0f;
     private float attackReset = 2.0f;
     private float distance;
     private float changeTime = 2.0f;
     private float newMove;
     private float attackRange = 4.0f;
+    private float moveDir = 1.0f;
 
     private AudioSource audioSource;
     public AudioClip attackSound;
@@ -22,14 +23,13 @@ public class EnemyMovement : MonoBehaviour
     private Color oldColor;
     private Animator animator;
 
-    int moveDir = 1;
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         spriteRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        timer = changeTime;
+        moveTimer = changeTime;
         oldColor = spriteRender.color;
         newColor = Color.red;
     }
@@ -37,8 +37,8 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0)
+        moveTimer -= Time.deltaTime;
+        if (moveTimer < 0)
         {
             ChangeDirection();
         }
@@ -76,20 +76,20 @@ public class EnemyMovement : MonoBehaviour
             attackTimer = attackReset;
         }
         spriteRender.color = newColor;
-        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, 2 * speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, 2 * moveSpeed * Time.deltaTime);
     }
 
     private void BasicMove()
     {
         animator.SetFloat("moveLeft", -moveDir);
         spriteRender.color = oldColor;
-        newMove = speed * moveDir * Time.deltaTime;
+        newMove = moveSpeed * moveDir * Time.deltaTime;
         transform.position = new Vector3(transform.position.x + newMove, transform.position.y);
     }
 
     private void ChangeDirection()
     {
         moveDir = -moveDir;
-        timer = changeTime;
+        moveTimer = changeTime;
     }
 }
