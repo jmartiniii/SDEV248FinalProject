@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//test
+using TMPro;
+
 public class GameController : MonoBehaviour
 {
     Vector2 startPos;
@@ -20,8 +23,11 @@ public class GameController : MonoBehaviour
     private int coinCount = 0;
     public Text coinText;
 
-    //death count
-    private int deathCount = 0;
+
+    // death count
+    [SerializeField]
+    int deaths;
+    DeathCounter deathCounter;
     public Text deathText;
 
 
@@ -31,14 +37,17 @@ public class GameController : MonoBehaviour
     {
         playerAudio = GetComponent<AudioSource>();
         startPos = transform.position;
+
+        //test
+        deathCounter = FindObjectOfType<DeathCounter>();
+        deaths = deathCounter.CurrentDeaths;
+        deathText.text = deaths + "";
     }
 
     private void Update()
     {
         //coin count
         coinText.text = coinCount.ToString();
-        //death count
-        deathText.text = deathCount.ToString();
     }
 
     // Update is called once per frame
@@ -59,6 +68,9 @@ public class GameController : MonoBehaviour
         else if (collision.CompareTag("SceneSwitch"))
         {
             StartCoroutine(SceneSwitch());
+
+            //death count
+            deathCounter.SetDeaths(deaths);
         }
 
     }
@@ -86,8 +98,9 @@ public class GameController : MonoBehaviour
 
     private void AddDeath()
     {
-        //add to death count
-        deathCount += 1;
+        //death count
+        deaths += 1;
+        deathText.text = deaths + "";
     }
 
     private void SpawnCorpse()
