@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 8f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
-    private bool canPlay;
+    private bool playerActive;
 
     public AudioClip jumpSound;
     private AudioSource playerAudio;
@@ -20,14 +20,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        canPlay = true;
+        playerActive = true;
         playerAudio = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        PlayerMove();
+        PlayerJump();
+        PlayerFlip();
+        PlayerActive();        
+    }
 
+    private void PlayerMove()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+
+    private void PlayerJump()
+    {
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             playerAudio.PlayOneShot(jumpSound, 0.5f);
@@ -38,19 +50,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
-        Flip();
-
-        if (canPlay == false)
-        {
-            speed = 0f;
-            jumpingPower = 0f;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
     private bool IsGrounded()
@@ -58,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
+    private void PlayerFlip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
@@ -69,10 +68,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void PlayerActive()
     {
-        if (other.gameObject.tag == "SceneSwitch") {
-            canPlay = false;
+        if (playerActive == false)
+        {
+            speed = 0f;
+            jumpingPower = 0f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SceneSwitch")) {
+            playerActive = false;
         }
     }
 }

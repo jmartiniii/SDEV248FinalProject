@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
+        GetDistance();
         
         if (distance < attackRange)
         {
@@ -58,12 +58,9 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void BasicMove()
+    private void GetDistance()
     {
-        animator.SetFloat("moveLeft", -moveDir);
-        spriteRender.color = oldColor;
-        newMove = speed * moveDir * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x + newMove, transform.position.y);
+        distance = Vector2.Distance(transform.position, player.transform.position);
     }
 
     private void AttackMove()
@@ -80,6 +77,14 @@ public class EnemyMovement : MonoBehaviour
         }
         spriteRender.color = newColor;
         transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, 2 * speed * Time.deltaTime);
+    }
+
+    private void BasicMove()
+    {
+        animator.SetFloat("moveLeft", -moveDir);
+        spriteRender.color = oldColor;
+        newMove = speed * moveDir * Time.deltaTime;
+        transform.position = new Vector3(transform.position.x + newMove, transform.position.y);
     }
 
     private void ChangeDirection()
