@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 0121a659315624d7a96e98abd2d2a16d, type: 3}
-  coinSound: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
   rb: {fileID: 7789122318888373650}
   groundCheck: {fileID: 427095473702634664}
   groundLayer:
@@ -229,7 +228,10 @@ MonoBehaviour:
   deadPrefab: {fileID: 1792434335573670995, guid: 3c92dbe5bb46b844bb029829d3a08345, type: 3}
   coinCount: 0
   coinText: {fileID: 0}
-  nextScene: 1
+  nextScene: 2
+  coinSound: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
+  deathCount: 0
+  deathText: {fileID: 0}
 --- !u!95 &2120043068574304128
 Animator:
   serializedVersion: 5

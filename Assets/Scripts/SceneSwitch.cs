@@ -15,15 +15,6 @@ public class SceneSwitch : MonoBehaviour
         myAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            myAnim.SetTrigger(PRESS_ANIM);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

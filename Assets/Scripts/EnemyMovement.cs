@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
-    public float speed;
+    private float speed = 1;
     private float timer;
     private float attackTimer = 0f;
     private float distance;
     private float changeTime = 2.0f;
-    float newMove;
+    private float newMove;
 
     private AudioSource audioSource;
     public AudioClip attackSound;

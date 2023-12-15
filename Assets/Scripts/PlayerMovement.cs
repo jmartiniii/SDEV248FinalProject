@@ -9,10 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
     private bool canPlay;
-    private GameController gameController;
 
     public AudioClip jumpSound;
-    public AudioClip coinSound;
     private AudioSource playerAudio;
 
     [SerializeField] private Rigidbody2D rb;
@@ -24,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     {
         canPlay = true;
         playerAudio = GetComponent<AudioSource>();
-        gameController = GameObject.Find("Player").GetComponent<GameController>();
     }
 
     void Update()
@@ -74,14 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Coin")
-        {
-            playerAudio.PlayOneShot(coinSound, 0.1f);
-            gameController.coinCount += 1;
-            Destroy(other.gameObject);
-        }
-
-        else if (other.gameObject.tag == "SceneSwitch") {
+        if (other.gameObject.tag == "SceneSwitch") {
             canPlay = false;
         }
     }

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class deadBounce : MonoBehaviour
 {
-    public float deathBounce;
+    private float bounceForce = 25;
 
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.up * deathBounce, ForceMode2D.Impulse);
-        //rb.AddForce(transform.eulerAngles = Vector3.forward * deathBounce);
+        rb.AddForce(transform.up * bounceForce, ForceMode2D.Impulse);
         rb.AddTorque(200);
     }
 }

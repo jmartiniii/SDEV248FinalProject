@@ -9,12 +9,19 @@ public class GameController : MonoBehaviour
     Vector2 startPos;
     public GameObject playerGameObject;
     public GameObject deadPrefab;
-    public int coinCount = 0;
-    public Text coinText;
+    
     public int nextScene;
 
+    // player audio and sound
+    private AudioSource playerAudio;
+    public AudioClip coinSound;
+
+    // coin count
+    private int coinCount = 0;
+    public Text coinText;
+
     //death count
-    public int deathCount = 0;
+    private int deathCount = 0;
     public Text deathText;
 
 
@@ -22,17 +29,16 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
         startPos = transform.position;
-
     }
 
     private void Update()
     {
+        //coin count
         coinText.text = coinCount.ToString();
-
         //death count
         deathText.text = deathCount.ToString();
-        
     }
 
     // Update is called once per frame
@@ -40,38 +46,59 @@ public class GameController : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Enemy"))
         {
+            AddDeath();
             Die();
+        }
+
+        else if (collision.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+            AddCoin();
         }
 
         else if (collision.CompareTag("SceneSwitch"))
         {
-            //SceneManager.LoadScene(nextScene);
-            Invoke(nameof(SceneSwitch), 2.0f);
+            StartCoroutine(SceneSwitch());
         }
 
     }
 
-    void SceneSwitch()
+    private IEnumerator SceneSwitch()
     {
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(nextScene);
     }
 
 
-    void Die() 
+    private void Die() 
     {
         playerGameObject.SetActive(false);
-        GameObject deathPlayer = (GameObject)Instantiate(deadPrefab, playerGameObject.transform.position, playerGameObject.transform.rotation);
-        deathPlayer.transform.localScale = new Vector3(playerGameObject.transform.localScale.x, playerGameObject.transform.localScale.y, playerGameObject.transform.localScale.z);
+        SpawnCorpse();
         Invoke(nameof(Respawn), 5.0f);
     }
 
-    void Respawn()
+    private void AddCoin()
+    {
+        playerAudio.PlayOneShot(coinSound, 0.1f);
+        // add to coin count
+        coinCount += 1;
+    }
+
+    private void AddDeath()
+    {
+        //add to death count
+        deathCount += 1;
+    }
+
+    private void SpawnCorpse()
+    {
+        GameObject deathPlayer = (GameObject)Instantiate(deadPrefab, playerGameObject.transform.position, playerGameObject.transform.rotation);
+        deathPlayer.transform.localScale = new Vector3(playerGameObject.transform.localScale.x, playerGameObject.transform.localScale.y, playerGameObject.transform.localScale.z);
+    }
+
+    private void Respawn()
     {
         transform.position = startPos;
         playerGameObject.SetActive(true);
-
-        //death count
-        deathCount = deathCount + 1;
-        
     }
 }
