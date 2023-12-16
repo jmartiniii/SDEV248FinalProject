@@ -51,6 +51,7 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         GetDistance();
+        AttackTimer();
         
         if (distance < attackRange)
         {
@@ -69,7 +70,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void AttackMove()
     {
-        attackTimer -= Time.deltaTime;
         Vector2 direction = playerTarget.transform.position - transform.position;
         direction.Normalize();
 
@@ -95,5 +95,10 @@ public class EnemyMovement : MonoBehaviour
     {
         moveDir = -moveDir;
         moveTimer = changeTime;
+    }
+
+    private void AttackTimer()
+    {
+        attackTimer -= Time.deltaTime;
     }
 }
