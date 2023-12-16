@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
-    public static bool Paused = false;
+    private static bool Paused = false;
     public GameObject PauseMenuCanvas;
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1f;
+        ResumeTime();
     }
 
     // Update is called once per frame
@@ -33,18 +33,34 @@ public class PauseMenu : MonoBehaviour
     void Stop()
     {
         PauseMenuCanvas.SetActive(true);
-        Time.timeScale = 0f;
+        PauseTime();
         Paused = true;
     }
 
     public void Play()
     {
         PauseMenuCanvas.SetActive(false);
-        Time.timeScale = 1f;
+        ResumeTime();
         Paused = false;
     }
 
     public void MainMenuButton()
+    {
+        Play();
+        GoToMainMenu();
+    }
+
+    private void ResumeTime()
+    {
+        Time.timeScale = 1f;
+    }
+
+    private void PauseTime()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void GoToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
