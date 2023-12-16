@@ -12,7 +12,7 @@ public class FinalScore : MonoBehaviour
         int deaths = FindAnyObjectByType<ScoreCounter>().CurrentDeaths;
         int coins = FindAnyObjectByType<ScoreCounter>().CurrentCoins;
 
-        finalScore.SetText("You retrieved " + coins + " coins and at the cost of " + deaths + " knight(s)!");
+        finalScore.SetText("You retrieved " + coins + " coins at the cost of " + deaths + " knight(s)!");
     }
 
     public void PlayAgain()
