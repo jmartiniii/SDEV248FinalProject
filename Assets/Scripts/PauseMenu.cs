@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour
 
     void Stop()
     {
+        // enable the pause menu, pause time, and change the pausse to true
         PauseMenuCanvas.SetActive(true);
         PauseTime();
         Paused = true;
@@ -39,6 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Play()
     {
+        // disable the pause menu, resume time, and change paused to false
         PauseMenuCanvas.SetActive(false);
         ResumeTime();
         Paused = false;
@@ -52,16 +54,19 @@ public class PauseMenu : MonoBehaviour
 
     private void ResumeTime()
     {
+        // set the game time back to normal
         Time.timeScale = 1f;
     }
 
     private void PauseTime()
     {
+        // set the game time to zero effectively pausing gameplay
         Time.timeScale = 0f;
     }
 
     private void GoToMainMenu()
     {
+        // load the main menu
         SceneManager.LoadScene("MainMenu");
     }
 

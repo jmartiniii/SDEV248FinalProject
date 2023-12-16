@@ -27,20 +27,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        PlayerActive();
         PlayerMove();
         PlayerJump();
         PlayerFlip();
-        PlayerActive();        
+    }
+
+    private void PlayerActive()
+    {
+        // if the player has touched the chest, disable movement
+        if (playerActive == false)
+        {
+            speed = 0f;
+            jumpingPower = 0f;
+        }
     }
 
     private void PlayerMove()
     {
+        // move the player
         horizontal = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
     private void PlayerJump()
     {
+        // make the player jump
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             playerAudio.PlayOneShot(jumpSound, 0.5f);
@@ -55,11 +67,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
+        // is the player on the ground
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     private void PlayerFlip()
     {
+        // look left or right depending on directions
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
             isFacingRight = !isFacingRight;
@@ -69,17 +83,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void PlayerActive()
-    {
-        if (playerActive == false)
-        {
-            speed = 0f;
-            jumpingPower = 0f;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // disable the player after touching the scene switch chest
         if (collision.CompareTag("SceneSwitch")) {
             playerActive = false;
         }

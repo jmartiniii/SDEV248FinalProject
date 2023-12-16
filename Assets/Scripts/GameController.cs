@@ -50,6 +50,8 @@ public class GameController : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Enemy"))
         {
+            // set recently died to prevent multiple deaths
+            // die and add death
             if (!recentlyDied)
             {
                 recentlyDied = true;
@@ -60,12 +62,14 @@ public class GameController : MonoBehaviour
 
         else if (collision.CompareTag("Coin"))
         {
+            // add coins
             Destroy(collision.gameObject);
             AddCoin();
         }
 
         else if (collision.CompareTag("SceneSwitch"))
         {
+            // switch scene
             UpdateCounters();
             StartCoroutine(SceneSwitch());
         }
@@ -115,6 +119,8 @@ public class GameController : MonoBehaviour
         // mvoe back to original position and set the player to active
         transform.position = startPos;
         playerGameObject.SetActive(true);
+
+        // set recently died to false so the player is capable of dying
         recentlyDied = false;
     }
 

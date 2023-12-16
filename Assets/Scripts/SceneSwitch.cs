@@ -17,6 +17,7 @@ public class SceneSwitch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // trigger chest sound and animation
         if (collision.CompareTag("Player"))
         {
             audioSource.PlayOneShot(chestAudio, 0.2f);
