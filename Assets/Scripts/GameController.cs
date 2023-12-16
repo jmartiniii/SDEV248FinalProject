@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     // death count
     [SerializeField] int deaths;
     public Text deathText;
+    private bool recentlyDied;
 
 
 
@@ -42,6 +43,8 @@ public class GameController : MonoBehaviour
         deathText.text = deaths.ToString();
         coins = scoreCounter.CurrentCoins;
         coinText.text = coins.ToString();
+
+        recentlyDied = false;
     }
 
     // Update is called once per frame
@@ -49,8 +52,12 @@ public class GameController : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Enemy"))
         {
-            AddDeath();
-            Die();
+            if (!recentlyDied)
+            {
+                recentlyDied = true;
+                Die();
+                AddDeath();                
+            }
         }
 
         else if (collision.CompareTag("Coin"))
@@ -110,6 +117,7 @@ public class GameController : MonoBehaviour
         // mvoe back to original position and set the player to active
         transform.position = startPos;
         playerGameObject.SetActive(true);
+        recentlyDied = false;
     }
 
     private void UpdateCounters()
