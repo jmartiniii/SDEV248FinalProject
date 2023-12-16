@@ -19,13 +19,13 @@ public class PauseMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(Paused)
+            if(!Paused)
             {
-                Play();
+                Stop();
             }
             else
             {
-                Stop();
+                Play();
             }
         }
     }

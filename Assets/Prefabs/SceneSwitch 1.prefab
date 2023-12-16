@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b2bca16b5b590488ae7e05361a78fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashAudio: {fileID: 8300000, guid: da4a2622abe334cb488e9a1baf0c8349, type: 3}
+  chestAudio: {fileID: 8300000, guid: da4a2622abe334cb488e9a1baf0c8349, type: 3}
 --- !u!82 &7978277028082681714
 AudioSource:
   m_ObjectHideFlags: 0

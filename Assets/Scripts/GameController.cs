@@ -9,8 +9,6 @@ public class GameController : MonoBehaviour
     Vector2 startPos;
     public GameObject playerGameObject;
     public GameObject deadPrefab;
-    
-    public int nextScene;
 
     // player audio and sound
     private AudioSource playerAudio;
@@ -23,10 +21,10 @@ public class GameController : MonoBehaviour
     [SerializeField] int coins;
     public Text coinText;
 
-
     // death count
     [SerializeField] int deaths;
     public Text deathText;
+    
     private bool recentlyDied;
 
 
@@ -78,7 +76,7 @@ public class GameController : MonoBehaviour
     {
         // wait 2 seconds then load the next scene
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 

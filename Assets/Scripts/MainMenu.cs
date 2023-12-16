@@ -9,7 +9,8 @@ public class MainMenu : MonoBehaviour
     {
         FindObjectOfType<ScoreCounter>().SetDeaths(0);
         FindObjectOfType<ScoreCounter>().SetCoins(0);
-        SceneManager.LoadScene("Level1");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Quit()
