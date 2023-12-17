@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
+    private float moveSpeed = 8f;
     private float jumpingPower = 16f;
     private bool isFacingRight;
     private bool playerActive;
@@ -28,18 +28,20 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         PlayerActive();
-        PlayerMove();
-        PlayerJump();
-        PlayerFlip();
     }
 
     private void PlayerActive()
     {
         // if the player has touched the chest, disable movement
-        if (playerActive == false)
+        if (playerActive)
         {
-            speed = 0f;
-            jumpingPower = 0f;
+            PlayerMove();
+            PlayerJump();
+            PlayerFlip();
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // move the player
         horizontal = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
     }
 
     private void PlayerJump()

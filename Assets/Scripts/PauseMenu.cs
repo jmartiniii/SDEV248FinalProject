@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResumeTime();
+        ResumeGame();
     }
 
     // Update is called once per frame
@@ -21,51 +21,34 @@ public class PauseMenu : MonoBehaviour
         {
             if(!Paused)
             {
-                Stop();
+                PauseGame();
             }
             else
             {
-                Play();
+                ResumeGame();
             }
         }
     }
 
-    void Stop()
+    void PauseGame()
     {
         // enable the pause menu, pause time, and change the pausse to true
         PauseMenuCanvas.SetActive(true);
-        PauseTime();
+        Time.timeScale = 0f;
         Paused = true;
     }
 
-    public void Play()
+    public void ResumeGame()
     {
         // disable the pause menu, resume time, and change paused to false
         PauseMenuCanvas.SetActive(false);
-        ResumeTime();
+        Time.timeScale = 1f;
         Paused = false;
     }
 
     public void MainMenuButton()
     {
-        Play();
-        GoToMainMenu();
-    }
-
-    private void ResumeTime()
-    {
-        // set the game time back to normal
-        Time.timeScale = 1f;
-    }
-
-    private void PauseTime()
-    {
-        // set the game time to zero effectively pausing gameplay
-        Time.timeScale = 0f;
-    }
-
-    private void GoToMainMenu()
-    {
+        ResumeGame();
         // load the main menu
         SceneManager.LoadScene("MainMenu");
     }
