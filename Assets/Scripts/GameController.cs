@@ -37,9 +37,9 @@ public class GameController : MonoBehaviour
 
         startPos = transform.position;
 
-        deaths = scoreCounter.CurrentDeaths;
+        deaths = scoreCounter.currentDeaths;
         deathText.text = deaths.ToString();
-        coins = scoreCounter.CurrentCoins;
+        coins = scoreCounter.currentCoins;
         coinText.text = coins.ToString();
 
         recentlyDied = false;

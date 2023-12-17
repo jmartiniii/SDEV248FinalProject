@@ -7,13 +7,13 @@ public class ScoreCounter : MonoBehaviour
     string deathKey = "Deaths";
     string coinKey = "Coins";
 
-    public int CurrentDeaths { get; set; }
-    public int CurrentCoins { get; set; }
+    public int currentDeaths { get; set; }
+    public int currentCoins { get; set; }
 
     private void Awake()
     {
-        CurrentDeaths = PlayerPrefs.GetInt(deathKey);
-        CurrentCoins = PlayerPrefs.GetInt(coinKey);
+        currentDeaths = PlayerPrefs.GetInt(deathKey);
+        currentCoins = PlayerPrefs.GetInt(coinKey);
     }
 
     public void SetDeaths(int deaths)

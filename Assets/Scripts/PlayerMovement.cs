@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight;
     private bool playerActive;
 
-    public AudioClip jumpSound;
     private AudioSource playerAudio;
+    public AudioClip jumpSound;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -27,29 +27,37 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        PlayerActive();
+        JumpFlip();
     }
 
-    private void PlayerActive()
+    private void LateUpdate()
     {
-        // if the player has touched the chest, disable movement
-        if (playerActive)
-        {
-            PlayerMove();
-            PlayerJump();
-            PlayerFlip();
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-        }
+        PlayerMove();
     }
 
     private void PlayerMove()
     {
-        // move the player
-        horizontal = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        if (playerActive)
+        {
+            // move the player
+            horizontal = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            // disable movement
+            rb.velocity = Vector3.zero;
+        }
+        
+    }
+
+    private void JumpFlip()
+    {
+        if (playerActive)
+        {
+            PlayerJump();
+            PlayerFlip();
+        }
     }
 
     private void PlayerJump()

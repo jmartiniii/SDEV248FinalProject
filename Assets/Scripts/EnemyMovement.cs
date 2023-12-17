@@ -42,21 +42,13 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         MoveTimer();
+        AttackTimer();
     }
 
     private void FixedUpdate()
     {
         GetDistance();
-        AttackTimer();
-        
-        if (distance < attackRange)
-        {
-            AttackMove();
-        }
-        else
-        {
-            BasicMove();
-        }
+        DecideMove();
     }
 
     private void MoveTimer()
@@ -102,6 +94,18 @@ public class EnemyMovement : MonoBehaviour
         spriteRender.color = oldColor;
         newMove = moveSpeed * moveDir * Time.deltaTime;
         transform.position = new Vector3(transform.position.x + newMove, transform.position.y);
+    }
+
+    private void DecideMove()
+    {
+        if (distance < attackRange)
+        {
+            AttackMove();
+        }
+        else
+        {
+            BasicMove();
+        }
     }
 
     private void ChangeDirection()

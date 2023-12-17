@@ -10,21 +10,21 @@ public class FinalScore : MonoBehaviour
     private void Awake()
     {
         // gather the death and coin counts for display
-        int deaths = FindAnyObjectByType<ScoreCounter>().CurrentDeaths;
-        int coins = FindAnyObjectByType<ScoreCounter>().CurrentCoins;
+        int totalDeaths = FindAnyObjectByType<ScoreCounter>().currentDeaths;
+        int totalCoins = FindAnyObjectByType<ScoreCounter>().currentCoins;
 
         // change the display text message based on the amount of knights lost during gameplay
-        if (deaths == 0)
+        if (totalDeaths < 1)
         {
-            finalScore.SetText("You retrieved " + coins + " coins without losing a single knight!");
+            finalScore.SetText("You retrieved " + totalCoins + " coins without losing a single knight!");
         }
-        else if (deaths == 1)
+        else if (totalDeaths == 1)
         {
-            finalScore.SetText("You retrieved " + coins + " coins at the cost of " + deaths + " knight!");
+            finalScore.SetText("You retrieved " + totalCoins + " coins at the cost of " + totalDeaths + " knight!");
         }
         else
         {
-            finalScore.SetText("You retrieved " + coins + " coins at the cost of " + deaths + " knights!");
+            finalScore.SetText("You retrieved " + totalCoins + " coins at the cost of " + totalDeaths + " knights!");
         }
         
     }
