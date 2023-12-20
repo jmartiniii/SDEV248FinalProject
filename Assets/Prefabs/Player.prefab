@@ -43,10 +43,9 @@ GameObject:
   - component: {fileID: 2611908800887134431}
   - component: {fileID: 7789122318888373650}
   - component: {fileID: 5463087858108120318}
-  - component: {fileID: 8188527838461323540}
-  - component: {fileID: 7974513965723531699}
   - component: {fileID: 2120043068574304128}
   - component: {fileID: 4026180114918757733}
+  - component: {fileID: 1068239136139794659}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -184,43 +183,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0020742416, y: -0.1237635}
   m_Size: {x: 0.57040024, y: 1.032473}
   m_Direction: 0
---- !u!114 &8188527838461323540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308224729606446315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a38523b5171c38429e2266922bd5565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpSound: {fileID: 8300000, guid: 0121a659315624d7a96e98abd2d2a16d, type: 3}
-  rb: {fileID: 7789122318888373650}
-  groundCheck: {fileID: 427095473702634664}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
---- !u!114 &7974513965723531699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308224729606446315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2541d18277fb4304b8cef0f0514445ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerGameObject: {fileID: 5308224729606446315}
-  deadPrefab: {fileID: 1792434335573670995, guid: 3c92dbe5bb46b844bb029829d3a08345, type: 3}
-  coinSound: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
-  coins: 0
-  coinText: {fileID: 0}
-  deaths: 0
-  deathText: {fileID: 0}
 --- !u!95 &2120043068574304128
 Animator:
   serializedVersion: 5
@@ -338,3 +300,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1068239136139794659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308224729606446315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f19199f9b12a443baf432480e66ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSound: {fileID: 8300000, guid: 0121a659315624d7a96e98abd2d2a16d, type: 3}
+  rigidBody: {fileID: 7789122318888373650}
+  groundCheck: {fileID: 427095473702634664}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64

@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
+        FindObjectOfType<ScoreCounter>().SetFader(0);
+        FindObjectOfType<ScoreCounter>().SetTimer(60);
         // set the death and coin counts to zero
         FindObjectOfType<ScoreCounter>().SetDeaths(0);
         FindObjectOfType<ScoreCounter>().SetCoins(0);

@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     // enemy target
     public GameObject playerTarget;
 
     // movement
-    private float newMove, distance, moveTimer;
+    private float distance, moveTimer;
     private float moveSpeed = 1.0f;
     private float changeTime = 2.0f;
     private float moveDir = 1.0f;
     
     // attack
     private float attackTimer = 0f;
-    private float attackReset = 2.0f;
-    private float attackRange = 4.0f;
     
     // audio
     private AudioSource audioSource;
@@ -69,6 +67,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void AttackMove()
     {
+        float attackReset = 2.0f;
         // determine the direction to move
         Vector2 direction = playerTarget.transform.position - transform.position;
         direction.Normalize();
@@ -92,12 +91,14 @@ public class EnemyMovement : MonoBehaviour
         // move back and forth based on timer and direction
         animator.SetFloat("moveLeft", -moveDir);
         spriteRender.color = oldColor;
-        newMove = moveSpeed * moveDir * Time.deltaTime;
+        float newMove = moveSpeed * moveDir * Time.deltaTime;
         transform.position = new Vector3(transform.position.x + newMove, transform.position.y);
     }
 
     private void DecideMove()
     {
+        float attackRange = 4.0f;
+
         if (distance < attackRange)
         {
             AttackMove();

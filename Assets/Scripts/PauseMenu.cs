@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-
-    private static bool Paused = false;
     public GameObject PauseMenuCanvas;
+    public GameObject HelpCanvas;
     // Start is called before the first frame update
     void Start()
     {
-        ResumeGame();
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -19,36 +18,31 @@ public class PauseMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!Paused)
-            {
-                PauseGame();
-            }
-            else
-            {
-                ResumeGame();
-            }
+            PauseResume();
         }
     }
 
-    void PauseGame()
+    private void PauseResume()
     {
-        // enable the pause menu, pause time, and change the pausse to true
-        PauseMenuCanvas.SetActive(true);
-        Time.timeScale = 0f;
-        Paused = true;
-    }
-
-    public void ResumeGame()
-    {
-        // disable the pause menu, resume time, and change paused to false
-        PauseMenuCanvas.SetActive(false);
-        Time.timeScale = 1f;
-        Paused = false;
+        if (HelpCanvas.activeSelf)
+        {
+            HelpCanvas.SetActive(false);
+            PauseMenuCanvas.SetActive(true);
+        }
+        else if (PauseMenuCanvas.activeSelf)
+        {
+            PauseMenuCanvas.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            PauseMenuCanvas.SetActive(true);
+        }
     }
 
     public void MainMenuButton()
     {
-        ResumeGame();
         // load the main menu
         SceneManager.LoadScene("MainMenu");
     }

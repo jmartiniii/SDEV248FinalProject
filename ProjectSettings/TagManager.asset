@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Enemy
   - SceneSwitch
+  - Coin5
   layers:
   - Default
   - TransparentFX

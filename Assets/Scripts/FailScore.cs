@@ -4,27 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class FinalScore : MonoBehaviour
+public class FailScore : MonoBehaviour
 {
-    public TMP_Text finalScore;
+    public TMP_Text failScore;
     private void Awake()
     {
         // gather the death and coin counts for display
         int totalDeaths = FindAnyObjectByType<ScoreCounter>().currentDeaths;
-        int totalCoins = FindAnyObjectByType<ScoreCounter>().currentCoins;
 
         // change the display text message based on the amount of knights lost during gameplay
-        if (totalDeaths < 1)
+        if (totalDeaths == 1)
         {
-            finalScore.SetText("You retrieved " + totalCoins + " coins without losing a single Knight!");
+            failScore.SetText("You lost your gold and 1 Knight to the darkness!");
         }
-        else if (totalDeaths == 1)
+        else if (totalDeaths > 1)
         {
-            finalScore.SetText("You retrieved " + totalCoins + " coins at the cost of " + totalDeaths + " Knight!");
+            failScore.SetText("You lost your gold and " + totalDeaths + " Knights to the darkness!");
         }
         else
         {
-            finalScore.SetText("You retrieved " + totalCoins + " coins at the cost of " + totalDeaths + " Knights!");
+            failScore.SetText("You broke the game!!");
         }
         
     }
